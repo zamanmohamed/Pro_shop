@@ -1,1 +1,6 @@
-
+main {
+  /* cant be smaller than 80hv */
+  /* 80% ක vh - view point height  එකක් පවති*/
+  /* vw - view point width*/
+  min-height: 80vh;
+}
