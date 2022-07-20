@@ -1,2 +1,3 @@
+ ####### --> මෙවා ගහද්දි root folder(pro-shop) හි සිටිය යුතුයි
  npm init
  npm i express

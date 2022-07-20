@@ -4,6 +4,7 @@ import { Card } from "react-bootstrap";
 import Rating from "./Rating";
 
 // as කෑල්ල ගැන පරිස්සමෙන්
+// variant
 
 const Product = ({ product }) => {
   return (
