@@ -9,3 +9,6 @@ https://fontawesome.com/ --> for icon use this
 ##React router##
 npm i react-router-dom
 npm i react-router-bootstrap
+
+##install axios##
+npm i axios

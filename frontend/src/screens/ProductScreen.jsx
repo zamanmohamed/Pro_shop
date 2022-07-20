@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
 import Rating from "../components/Rating";
-import products from "../products";
+import axios from "axios";
+//import products from "../products";
 
 //fluid -->  container එකට පිටින් image එක ගිය විට මෙය භාවිතාවෙ
 //variant="flush" --> ListGroup හි border ඉවත් කරනු ලැබෙ.
 
 const ProductScreen = () => {
-  let p1 = useParams().id;
-  const product = products.find((p) => p._id === p1);
+  const id = useParams().id;
+  //const product = products.find((p) => p._id === id);
+
+  const [product, setProduct] = useState({});
+
+  useEffect(() => {
+    const fethProduct = async () => {
+      const { data } = await axios.get(`/api/products/${id}`);
+      setProduct(data);
+    };
+    fethProduct();
+  }, [id]);
 
   return (
     <>
