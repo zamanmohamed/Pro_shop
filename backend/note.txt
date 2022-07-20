@@ -2,3 +2,6 @@
  npm init
  npm i express
  npm i -D nodemon concurrently 
+
+### env file ### --> මෙවා ගහද්දි root folder(pro-shop) හි සිටිය යුතුයි
+ npm i dotenv
