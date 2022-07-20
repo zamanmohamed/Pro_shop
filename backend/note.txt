@@ -5,3 +5,16 @@
 
 ### env file ### --> මෙවා ගහද්දි root folder(pro-shop) හි සිටිය යුතුයි
  npm i dotenv
+
+
+#backend වල data front ආකාරය import කරන්න package.json හි
+ {
+    "type": "module"
+ }
+
+# npm i -D nodemon concurrently පසුව package.json හි concurrently front back දෙකම එකපාර run කිරීමට
+ {
+    "server": "nodemon backend/server",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+ }
