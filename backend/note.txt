@@ -23,9 +23,11 @@
  npm i mongoose
 
 ##
- npm i bcryptjs
+npm i bcryptjs
 
- ## express-async-handler
- npm install --save express-async-handler
+## express-async-handler
+npm install --save express-async-handler
+
+
 
 

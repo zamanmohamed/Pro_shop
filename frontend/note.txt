@@ -12,3 +12,6 @@ npm i react-router-bootstrap
 
 ##install axios##
 npm i axios
+
+## redux ##
+npm i redux react-redux redux-thunk redux-devtools-extension
