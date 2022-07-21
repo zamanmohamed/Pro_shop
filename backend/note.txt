@@ -24,3 +24,8 @@
 
 ##
  npm i bcryptjs
+
+ ## express-async-handler
+ npm install --save express-async-handler
+
+
