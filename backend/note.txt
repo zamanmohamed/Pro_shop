@@ -21,3 +21,6 @@
 
 ## mongodb
  npm i mongoose
+
+##
+ npm i bcryptjs
