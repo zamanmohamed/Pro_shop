@@ -1,23 +1,26 @@
 import React, { useEffect } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Row,
-  Col,
-  ListGroup,
-  Image,
-  Form,
-  Button,
-  Card,
-} from "react-bootstrap";
-import { addToCart } from "../actions/cartAction";
+import { Row, Col, ListGroup, Image, Form, Button } from "react-bootstrap";
+import { addToCart, removeFromCart } from "../actions/cartAction";
 import Message from "../components/Message";
 
 const CartScreen = () => {
   const location = useLocation();
   const productID = useParams().id;
+
   //output --> location.search = ?qty=1
   const qty = location.search ? Number(location.search.split("=")[1]) : 1;
+
+  let price = (cartItems) => {
+    return cartItems
+      .reduce((acc, item) => acc + item.qty * item.price, 0)
+      .toFixed(2);
+  };
+
+  // array.reduce(function(accumulator, currentValue) {
+  //   return accumulator + currentValue;
+  //   }, 0)
 
   const dispatch = useDispatch();
 
@@ -31,7 +34,7 @@ const CartScreen = () => {
   }, [dispatch, productID, qty]);
 
   const removeFromCartHandler = (id) => {
-    //dispatch(removeFromCart(id))
+    dispatch(removeFromCart(id));
   };
 
   const checkoutHandler = () => {};
@@ -100,6 +103,7 @@ const CartScreen = () => {
                 {cartItems
                   .reduce((acc, item) => acc + item.qty * item.price, 0)
                   .toFixed(2)}
+                {price}
               </ListGroup.Item>
               {/* ============================================ */}
               {/* var array = [36, 25, 6, 15];

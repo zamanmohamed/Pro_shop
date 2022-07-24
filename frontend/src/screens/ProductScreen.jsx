@@ -22,7 +22,7 @@ import Rating from "../components/Rating";
 
 const ProductScreen = () => {
   const id = useParams().id;
-  const [qty, setqty] = useState();
+  const [qty, setqty] = useState(1);
   const history = useNavigate();
 
   const productDetail = useSelector((state) => state.productDetails);
