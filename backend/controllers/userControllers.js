@@ -17,6 +17,7 @@ const authUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      //user ID එක JWT Token එක ලෙස පරිවර්තනය කර ඇත --> (JWT (2))
       token: generateToken(user._id),
     });
   } else {
@@ -25,4 +26,26 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser };
+//@desc Get user profile
+//@route GET/api/users/profile
+//@access Private
+
+const getUserProfile = asyncHandler(async (req, res) => {
+  //මෙහිදී authMiddleware.js හි cerate කරපු "req.user" variable එක use කරයි --> (JWT (4))
+  const user = await User.findById(req.user._id);
+  console.log(req.user);
+
+  if (user) {
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
+
+export { authUser, getUserProfile };
