@@ -27,10 +27,23 @@ const userSchema = mongoose.Schema(
   }
 );
 
-//bcrypt වලින් password වලින්  mathch කිරීමට  මෙතනින් method එකක් සාදා ගන්නවා
+/*bcrypt වලින් encrypt වෙලා momgoDB හි save වෙලා ඇති password එක dcrypt කරලා 
+ අපි enter කරන  password එක සමග mathc කර comapre කිරීමට මෙම method 
+ එක use කරයි */
 userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
+
+/*අපි enter කරන password එක bcrypt වලින් encrypt කර mongodb හි save
+කිරීමට මෙම method එක use කරයි  */
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    next();
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
 
 const User = mongoose.model("User", userSchema);
 
