@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
 import CartScreen from "./screens/CartScreen";
+import LoginScreen from "./screens/LoginScreen";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
             <Route path="product">
               <Route path=":id" element={<ProductScreen />} />
             </Route>
+            <Route path="login" element={<LoginScreen />} />
             <Route path="cart" element={<CartScreen />}>
               <Route path=":id" element={<CartScreen />} />
             </Route>
