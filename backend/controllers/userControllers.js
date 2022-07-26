@@ -79,4 +79,36 @@ const getUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser, getUserProfile, registerUser };
+//@desc Update user profile
+//@route GET/api/users/profile
+//@access Private
+
+const updateUserProfile = asyncHandler(async (req, res) => {
+  //මෙහිදී authMiddleware.js හි cerate කරපු "req.user" variable එක use කරයි --> (JWT (4))
+  const user = await User.findById(req.user._id);
+  console.log(req.user);
+
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+
+    const updatedUser = await user.save();
+
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+      token: generateToken(updatedUser._id),
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
+
+export { authUser, getUserProfile, registerUser, updateUserProfile };
