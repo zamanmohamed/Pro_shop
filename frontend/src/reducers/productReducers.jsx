@@ -7,6 +7,7 @@ import {
   PRODUCT_DETAILS_FAIL,
 } from "../constants/productConstants";
 
+// function  වලින් input ලැබෙනවිට පමණක් "action"  අවශ්‍ය වෙ
 export const productListReducer = (state = { products: [] }, action) => {
   switch (action.type) {
     case PRODUCT_LIST_REQUEST:

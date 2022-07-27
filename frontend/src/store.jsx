@@ -31,8 +31,20 @@ const userInfoFromStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
   : null;
 
+const shippingAddressFromStorage = localStorage.getItem("shippingAddress")
+  ? JSON.parse(localStorage.getItem("shippingAddress"))
+  : {};
+
 const initialState = {
-  cart: { cartItems: cartItemsFromStorage },
+  /* cart reducer හි cartItems හා shippingAddress varibles වලට 
+     userInfoFromStorage shippingAddressFromStorage assign කර ඇත */
+  cart: {
+    cartItems: cartItemsFromStorage,
+    shippingAddress: shippingAddressFromStorage,
+  },
+
+  /* userLogin reducer හි userInfo varible එකට 
+     userInfoFromStorage එක  assign කර ඇත */
   userLogin: { userInfo: userInfoFromStorage },
 };
 

@@ -7,6 +7,9 @@ import Loader from "../components/Loader";
 import { getUserDetails, updateUserProfile } from "../actions/userAction";
 
 const ProfileScreen = () => {
+  const userDetails = useSelector((state) => state.userDetails);
+  const { loading, error, user } = userDetails;
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,9 +18,6 @@ const ProfileScreen = () => {
 
   const dispatch = useDispatch();
   const history = useNavigate();
-
-  const userDetails = useSelector((state) => state.userDetails);
-  const { loading, error, user } = userDetails;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, ListGroup, Image, Form, Button } from "react-bootstrap";
 import { addToCart, removeFromCart } from "../actions/cartAction";
@@ -8,6 +8,7 @@ import Message from "../components/Message";
 const CartScreen = () => {
   const location = useLocation();
   const productID = useParams().id;
+  const history = useNavigate();
 
   //output --> location.search = ?qty=1
   const qty = location.search ? Number(location.search.split("=")[1]) : 1;
@@ -37,7 +38,9 @@ const CartScreen = () => {
     dispatch(removeFromCart(id));
   };
 
-  const checkoutHandler = () => {};
+  const checkoutHandler = () => {
+    history("/login?redirect=shipping");
+  };
   return (
     <>
       <Row>

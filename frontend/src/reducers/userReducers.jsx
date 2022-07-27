@@ -16,6 +16,7 @@ import {
   USER_UPDATE_PROFILE_SUCCESS,
 } from "../constants/userConstants";
 
+// function  වලින් input ලැබෙනවිට පමණක් "action"  අවශ්‍ය වෙ
 export const userLoginReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_LOGIN_REQUEST:
