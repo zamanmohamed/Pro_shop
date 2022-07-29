@@ -37,7 +37,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
     //   type: CART_CLEAR_ITEMS,
     //   payload: data,
     // });
-    localStorage.removeItem("cartItems");
+    //localStorage.removeItem("cartItems");
   } catch (error) {
     const message =
       error.response && error.response.data.message
@@ -66,6 +66,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
     // "Content-Type": "application/json", --> get request වලට අවශ්‍ය නැත
     const config = {
       headers: {
+        "Content-Type": "application/json",
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
