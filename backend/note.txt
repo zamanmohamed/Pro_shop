@@ -31,3 +31,7 @@ npm install --save express-async-handler
 ## jsonwebtoken
 npm i jsonwebtoken
 
+## PAYPAL
+https://developer.paypal.com/developer/applications
+
+
