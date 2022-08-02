@@ -5,10 +5,13 @@ import {
   getUserProfile,
   registerUser,
   updateUserProfile,
+  getUsers,
 } from "../controllers/userControllers.js";
-import { protect } from "../middleware/authMiddleware.js";
+import { protect, admin } from "../middleware/authMiddleware.js";
 
-router.route("/").post(registerUser);
+//මෙහිදී  isAdmin --> true  නම් පමණ්ක් get request එක වැඩ කරයි
+router.route("/").post(registerUser).get(protect, admin, getUsers);
+
 router.post("/login", authUser);
 
 /*මෙම routes 2ක protect කර ඇති බැවින් 

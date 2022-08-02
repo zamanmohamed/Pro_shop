@@ -59,4 +59,14 @@ eSkQO6Utiov2bc53hynyWCarTvI
   }
 });
 
-export { protect };
+const admin = (req, res, next) => {
+  //req.user එකක් තිබෙද හා එම user admin කෙනෙක්ද කියා මෙහිදී බලයි
+  if (req.user && req.user.isAdmin) {
+    next();
+  } else {
+    res.status(401);
+    throw new Error("Not authorized as an admin");
+  }
+};
+
+export { protect, admin };
