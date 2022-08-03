@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 // import Paginate from "../components/Paginate";
-// import { listProducts } from "../actions/productActions";
+import { listProducts, deleteProduct } from "../actions/productActions";
 // import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
 
 const ProductListScreen = () => {
@@ -17,14 +17,14 @@ const ProductListScreen = () => {
   const dispatch = useDispatch();
 
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products, page, pages } = productList;
+  const { loading, error, products } = productList;
 
-  //   const productDelete = useSelector((state) => state.productDelete);
-  //   const {
-  //     loading: loadingDelete,
-  //     error: errorDelete,
-  //     success: successDelete,
-  //   } = productDelete;
+  const productDelete = useSelector((state) => state.productDelete);
+  const {
+    loading: loadingDelete,
+    error: errorDelete,
+    success: successDelete,
+  } = productDelete;
 
   //   const productCreate = useSelector((state) => state.productCreate);
   //   const {
@@ -47,22 +47,22 @@ const ProductListScreen = () => {
     // if (successCreate) {
     //   history(`/admin/product/${createdProduct._id}/edit`);
     // } else {
-    //   dispatch(listProducts("", pageNumber));
+    dispatch(listProducts());
     // }
   }, [
     dispatch,
     history,
     userInfo,
-    // successDelete,
+    successDelete,
     // successCreate,
     // createdProduct,
     // pageNumber,
   ]);
 
   const deleteHandler = (id) => {
-    // if (window.confirm("Are you sure")) {
-    //   dispatch(deleteProduct(id));
-    // }
+    if (window.confirm("Are you sure")) {
+      dispatch(deleteProduct(id));
+    }
   };
 
   const createProductHandler = () => {
@@ -81,9 +81,9 @@ const ProductListScreen = () => {
           </Button>
         </Col>
       </Row>
-      {/* {loadingDelete && <Loader />}
+      {loadingDelete && <Loader />}
       {errorDelete && <Message variant="danger">{errorDelete}</Message>}
-      {loadingCreate && <Loader />}
+      {/* {loadingCreate && <Loader />}
       {errorCreate && <Message variant="danger">{errorCreate}</Message>} */}
       {loading ? (
         <Loader />
