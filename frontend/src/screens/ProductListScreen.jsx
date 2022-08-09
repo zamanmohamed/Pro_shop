@@ -6,8 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 // import Paginate from "../components/Paginate";
-import { listProducts, deleteProduct } from "../actions/productActions";
-// import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
+import {
+  listProducts,
+  deleteProduct,
+  createProduct,
+} from "../actions/productActions";
+import { PRODUCT_CREATE_RESET } from "../constants/productConstants";
 
 const ProductListScreen = () => {
   const history = useNavigate();
@@ -26,36 +30,36 @@ const ProductListScreen = () => {
     success: successDelete,
   } = productDelete;
 
-  //   const productCreate = useSelector((state) => state.productCreate);
-  //   const {
-  //     loading: loadingCreate,
-  //     error: errorCreate,
-  //     success: successCreate,
-  //     product: createdProduct,
-  //   } = productCreate;
+  const productCreate = useSelector((state) => state.productCreate);
+  const {
+    loading: loadingCreate,
+    error: errorCreate,
+    success: successCreate,
+    product: createdProduct,
+  } = productCreate;
 
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   useEffect(() => {
-    // dispatch({ type: PRODUCT_CREATE_RESET });
+    dispatch({ type: PRODUCT_CREATE_RESET });
 
     if (!userInfo || !userInfo.isAdmin) {
       history("/login");
     }
 
-    // if (successCreate) {
-    //   history(`/admin/product/${createdProduct._id}/edit`);
-    // } else {
-    dispatch(listProducts());
-    // }
+    if (successCreate) {
+      history(`/admin/product/${createdProduct._id}/edit`);
+    } else {
+      dispatch(listProducts());
+    }
   }, [
     dispatch,
     history,
     userInfo,
     successDelete,
-    // successCreate,
-    // createdProduct,
+    successCreate,
+    createdProduct,
     // pageNumber,
   ]);
 
@@ -66,7 +70,7 @@ const ProductListScreen = () => {
   };
 
   const createProductHandler = () => {
-    // dispatch(createProduct());
+    dispatch(createProduct());
   };
 
   return (
@@ -83,8 +87,8 @@ const ProductListScreen = () => {
       </Row>
       {loadingDelete && <Loader />}
       {errorDelete && <Message variant="danger">{errorDelete}</Message>}
-      {/* {loadingCreate && <Loader />}
-      {errorCreate && <Message variant="danger">{errorCreate}</Message>} */}
+      {loadingCreate && <Loader />}
+      {errorCreate && <Message variant="danger">{errorCreate}</Message>}
       {loading ? (
         <Loader />
       ) : error ? (
