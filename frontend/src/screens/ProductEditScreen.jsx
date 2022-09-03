@@ -54,8 +54,11 @@ const ProductEditScreen = () => {
   }, [dispatch, history, productId, product, successUpdate]);
 
   const uploadFileHandler = async (e) => {
+    //මෙතනදි select කරන පලමු image එකෙ නම ගනී
     const file = e.target.files[0];
     const formData = new FormData();
+
+    //image එක FormData array එක තුල save කරයි
     formData.append("image", file);
     setUploading(true);
     try {
@@ -65,6 +68,7 @@ const ProductEditScreen = () => {
         },
       };
       const { data } = await axios.post("/api/upload", formData, config);
+      console.log(data);
       setImage(data);
       setUploading(false);
     } catch (error) {

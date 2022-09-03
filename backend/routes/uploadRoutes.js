@@ -3,6 +3,7 @@ import express from "express";
 import multer from "multer";
 const router = express.Router();
 
+//uploads folder තුල save කරන අතර file name එකද මෙහිදී define කරගනී ==> (1)
 const storage = multer.diskStorage({
   destination(req, file, cb) {
     cb(null, "uploads/");
@@ -15,6 +16,7 @@ const storage = multer.diskStorage({
   },
 });
 
+//check File Type --> මෙහිදී /jpg|jpeg|png/ පමණක් ගනී ==> (2)
 function checkFileType(file, cb) {
   const filetypes = /jpg|jpeg|png/;
   const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
@@ -27,6 +29,7 @@ function checkFileType(file, cb) {
   }
 }
 
+// (1) හා (2) use කරමින් multer function එක call කරයි
 const upload = multer({
   storage,
   fileFilter: function (req, file, cb) {
@@ -34,6 +37,7 @@ const upload = multer({
   },
 });
 
+//මෙහිදී file.path එක return කරයි
 router.post("/", upload.single("image"), (req, res) => {
   res.send(`/${req.file.path}`);
 });
