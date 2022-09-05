@@ -18,3 +18,6 @@ npm i redux react-redux redux-thunk redux-devtools-extension
 
 ## paypal button ##
 npm install react-paypal-button-v2 --force
+
+## morgan ##
+npm i morgan

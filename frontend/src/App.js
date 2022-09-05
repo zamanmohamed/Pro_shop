@@ -28,6 +28,9 @@ const App = () => {
       <main className="py-3">
         <Container>
           <Routes>
+            <Route path="search">
+              <Route path=":keyword" element={<HomeScreen />} />
+            </Route>
             <Route path="/" element={<HomeScreen />} />
             <Route path="product">
               <Route path=":id" element={<ProductScreen />} />
