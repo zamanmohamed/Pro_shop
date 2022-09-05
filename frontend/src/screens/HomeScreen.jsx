@@ -5,17 +5,19 @@ import Product from "../components/Product";
 import { Row, Col } from "react-bootstrap";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
+import Paginate from "../components/Paginate";
 import { listProducts } from "../actions/productActions";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
   const keyword = useParams().keyword;
+  const pageNumber = useParams().pageNumber;
   const productList = useSelector((state) => state.productList);
-  const { loading, error, products } = productList;
+  const { loading, error, products, page, pages } = productList;
 
   useEffect(() => {
-    dispatch(listProducts(keyword));
-  }, [dispatch, keyword]);
+    dispatch(listProducts(keyword, pageNumber));
+  }, [dispatch, keyword, pageNumber]);
 
   console.log(keyword);
   return (
@@ -36,6 +38,7 @@ const HomeScreen = () => {
           ))}
         </Row>
       )}
+      <Paginate pages={pages} page={page} keyword={keyword && keyword} />
     </>
   );
 };
