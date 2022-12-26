@@ -1,4 +1,5 @@
 //Middleware වලට (req, res, next)  යන 3ම පවති
+//if route we enter wrong route --> eg:- http://localhost:5000/asdffgggddd
 const notFound = (req, res, next) => {
   const error = new Error(`Not Found - ${req.originalUrl}`);
   res.status(404);
